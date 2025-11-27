@@ -433,4 +433,80 @@ main {
         print-color-adjust: exact;
         -webkit-print-color-adjust: exact;
     }
+
+}
+/* css/estilos.css - AGREGAR AL FINAL DE TODO */
+
+/* ==========================================================================
+   DISEÑO RESPONSIVO (MÓVILES Y TABLETS)
+   ========================================================================== */
+
+/* Reglas que solo aplican si la pantalla es menor a 768px (Tablets y Celulares) */
+@media (max-width: 768px) {
+
+    /* 1. Ajustar el Encabezado */
+    .encabezado-flex {
+        flex-direction: column; /* Poner elementos uno debajo del otro */
+        text-align: center;
+        gap: 15px; /* Espacio entre título y botones */
+    }
+
+    h1 {
+        font-size: 1.2rem; /* Título más pequeño */
+        justify-content: center; /* Centrar icono y texto */
+    }
+
+    nav {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+    }
+
+    .boton-nav {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+        flex: 1; /* Que los botones ocupen el ancho disponible */
+    }
+
+    /* 2. Ajustar la Pantalla de Bienvenida */
+    .titulo-hero {
+        font-size: 1.8rem; /* Reducir tamaño gigante */
+    }
+    
+    .contenido-hero {
+        padding: 0 15px; /* Margen para que no pegue a los bordes */
+    }
+
+    /* 3. Ajustar Secciones y Formularios */
+    .seccion-vista {
+        padding: 20px 15px; /* Menos relleno interno */
+    }
+
+    /* Botones más grandes para dedos (Touch friendly) */
+    .boton-principal, .boton-hero {
+        padding: 15px;
+        font-size: 1rem;
+    }
+
+    /* 4. Tabla con Scroll Horizontal (Crucial en móviles) */
+    .tabla-scroll {
+        width: 100%;
+        overflow-x: auto; /* Permite deslizar con el dedo si la tabla es muy ancha */
+        -webkit-overflow-scrolling: touch; /* Suavidad en iPhone */
+        padding-bottom: 10px;
+    }
+
+    /* Ajustar tamaño de letra de la tabla */
+    .tabla-academica th, .tabla-academica td {
+        padding: 10px;
+        font-size: 0.85rem; /* Letra un poco más chica para que quepa más info */
+    }
+
+    /* 5. Alertas (Toast) */
+    #contenedorAlertas {
+        width: 90%; /* Que no ocupe ancho fijo, sino porcentaje */
+        right: 5%; /* Centrado relativo */
+        left: 5%;
+    }
 }

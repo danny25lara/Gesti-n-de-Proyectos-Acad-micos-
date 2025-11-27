@@ -1,0 +1,436 @@
+
+/* --- 1. Variables de Color (Paleta Neutra & Pro) --- */
+:root {
+    /* Colores principales */
+    --color-primario: #2c3e50; /* Gris pizarra oscuro (para textos principales) */
+    --color-acento: #3498db;   /* Azul cobalto (para botones y enlaces) */
+    --color-acento-hover: #2980b9; /* Azul más oscuro para hover */
+    --color-fondo-body: #ecf0f1;   /* Blanco humo muy suave */
+    --color-fondo-panel: #ffffff;  /* Blanco puro */
+    --color-texto-secundario: #7f8c8d; /* Gris medio */
+    
+    /* Estados (Semáforo elegante) */
+    --estado-ok: #27ae60;    /* Verde esmeralda */
+    --estado-pendiente: #f39c12; /* Naranja suave */
+    --estado-error: #c0392b;   /* Rojo ladrillo */
+    
+    /* Sombras y bordes */
+    --sombra-suave: 0 2px 15px rgba(0,0,0,0.05);
+    --borde-sutil: 1px solid #e0e0e0;
+}
+/* --- 2. Reset & Tipografía Moderna --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: var(--color-fondo-body);
+    color: var(--color-primario);
+    /* Usamos una pila de fuentes de sistema modernas para velocidad y limpieza */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+}
+/* --- 3. Encabezado (Tipo Dashboard) --- */
+header {
+    background-color: var(--color-fondo-panel);
+    padding: 1rem 0;
+    box-shadow: var(--sombra-suave);
+    border-bottom: var(--borde-sutil);
+}
+.contenedor {
+    width: 92%;
+    max-width: 1200px;
+    margin: auto;
+}
+.encabezado-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+h1 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--color-primario);
+    display: flex;
+    align-items: center;
+}
+/* Navegación tipo "Tabs" modernas */
+nav {
+    background-color: #f8f9fa;
+    padding: 5px;
+    border-radius: 8px;
+    border: var(--borde-sutil);
+}
+.boton-nav {
+    background: transparent;
+    border: none;
+    color: var(--color-texto-secundario);
+    padding: 8px 16px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 500;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+.boton-nav:hover {
+    color: var(--color-primario);
+    background-color: rgba(0,0,0,0.03);
+}
+.boton-nav.activo {
+    background-color: var(--color-fondo-panel);
+    color: var(--color-acento);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+    font-weight: 600;
+}
+/* --- 4. Cuerpo Principal --- */
+main {
+    padding: 30px 0; /* Esto ya lo tenías */
+    flex: 1; /* Hace que el main ocupe todo el espacio disponible */
+}
+/* En css/estilos.css */
+#aplicacionPrincipal {
+    /* 1. Ocupar mínimo el 100% del alto de la ventana visible */
+    min-height: 100vh;
+    
+    /* 2. Activar Flexbox para organizar verticalmente */
+    display: flex;
+    flex-direction: column;
+}
+/* Paneles (Tarjetas blancas limpias) */
+.seccion-vista {
+    background: var(--color-fondo-panel);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: var(--sombra-suave);
+    border: var(--borde-sutil);
+}
+.titulo-seccion {
+    font-size: 1.3rem;
+    color: var(--color-primario);
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+.oculto { display: none; }
+/* --- 5. Tabla Profesional --- */
+.tabla-scroll {
+    overflow-x: auto;
+}
+.tabla-academica {
+    width: 100%;
+    border-collapse: separate; /* Importante para los bordes redondeados */
+    border-spacing: 0;
+    width: 100%;
+}
+.tabla-academica th, .tabla-academica td {
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: var(--borde-sutil);
+}
+.tabla-academica th {
+    background-color: #f8f9fa;
+    color: var(--color-texto-secundario);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    border-top: var(--borde-sutil);
+}
+/* Esquinas redondeadas para el encabezado de la tabla */
+.tabla-academica th:first-child { border-top-left-radius: 8px; }
+.tabla-academica th:last-child { border-top-right-radius: 8px; }
+
+/* Efecto hover en las filas */
+.tabla-academica tbody tr:hover {
+    background-color: #f9fafb;
+}
+/* Porcentaje en negrita */
+.tabla-academica td strong {
+    font-weight: 700;
+    color: var(--color-primario);
+}
+/* --- 6. Etiquetas (Badges) Modernas --- */
+.etiqueta {
+    padding: 6px 12px;
+    border-radius: 20px; /* Forma de píldora */
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-block;
+    /* Colores suaves con texto oscuro */
+}
+.estado-ok { background-color: #d4edda; color: var(--estado-ok); }
+.estado-pendiente { background-color: #fce5cd; color: var(--estado-pendiente); }
+.estado-retraso { background-color: #f8d7da; color: var(--estado-error); }
+/* --- 7. Botones de Acción (Iconos) --- */
+.boton-accion {
+    border: none;
+    padding: 8px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%; /* Botones redondos */
+    cursor: pointer;
+    font-size: 0.9rem;
+    margin: 0 4px;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.boton-accion:hover { transform: translateY(-2px); box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+/* Colores más sutiles para los botones */
+.boton-editar { background-color: #e3f2fd; color: var(--color-acento); }
+.boton-eliminar { background-color: #fbe9e7; color: var(--estado-error); }
+/* --- 8. Formulario Moderno --- */
+.formulario-academico {
+    max-width: 600px;
+}
+.grupo-form { margin-bottom: 20px; }
+.grupo-form label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--color-primario);
+    font-size: 0.95rem;
+}
+.grupo-form input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #dcdfe6;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+    background-color: #fdfdfd;
+}
+.grupo-form input:focus {
+    outline: none;
+    border-color: var(--color-acento);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1); /* Anillo de enfoque sutil */
+}
+.boton-principal {
+    background-color: var(--color-acento);
+    color: white;
+    padding: 14px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+.boton-principal:hover { background-color: var(--color-acento-hover); }
+/* --- 9. Alertas Tipo "Toast" --- */
+#contenedorAlertas {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+.alerta {
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    font-family: inherit;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    animation: slideInRight 0.3s ease-out;
+    min-width: 300px;
+    background: var(--color-fondo-panel);
+    border-left: 5px solid;
+}
+/* Iconos antes del mensaje */
+.alerta-exito { border-color: var(--estado-ok); }
+.alerta-exito::before { content: '✅'; margin-right: 10px; }
+
+.alerta-error { border-color: var(--estado-error); }
+.alerta-error::before { content: '⚠️'; margin-right: 10px; }
+
+@keyframes slideInRight {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+/* --- 10. Pie de Página --- */
+.pie-pagina {
+    text-align: center;
+    padding: 20px;
+    color: var(--color-texto-secundario);
+    font-size: 0.9rem;
+}
+.mostrar-app-animado {
+    /* display: block; <--- BORRA O COMENTA ESTA LÍNEA si la tenías */
+    
+    /* Flexbox ya está definido en #aplicacionPrincipal, así que solo animamos la opacidad */
+    animation: aparecerSuave 0.8s forwards;
+    
+    /* Si por alguna razón se rompe, fuerza el flex aquí también: */
+    display: flex !important; 
+    flex-direction: column;
+}
+/* --- ESTILOS DE LA PANTALLA DE BIENVENIDA --- */
+/* Clase utilitaria para ocultar la app al inicio */
+.app-oculta {
+    display: none;
+    opacity: 0; /* Preparado para animación */
+}
+/* El contenedor principal que ocupa toda la pantalla */
+.bienvenida-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh; /* 100% de la altura de la ventana */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Un degradado profesional y moderno (Azul grisáceo a blanco) */
+    background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+    z-index: 2000; /* Asegura que esté encima de todo */
+    text-align: center;
+    padding: 20px;
+    transition: all 0.5s ease-in-out; /* Suavidad al desaparecer */
+}
+/* Cuando añadimos esta clase con JS, la pantalla se desvanece hacia arriba */
+.bienvenida-container.desaparecer {
+    opacity: 0;
+    transform: translateY(-50px);
+    pointer-events: none; /* Evita clicks mientras desaparece */
+}
+.contenido-hero {
+    max-width: 600px;
+    position: relative;
+    z-index: 2;
+}
+.icono-hero {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    animation: flotar 3s ease-in-out infinite;
+}
+.titulo-hero {
+    font-size: 2.5rem;
+    color: var(--color-primario);
+    margin-bottom: 15px;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+.subtitulo-hero {
+    font-size: 1.1rem;
+    color: var(--color-texto-secundario);
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+/* Botón gigante y llamativo */
+.boton-hero {
+    background-color: var(--color-acento);
+    color: white;
+    border: none;
+    padding: 15px 35px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 50px; /* Bordes muy redondos */
+    cursor: pointer;
+    box-shadow: 0 10px 20px -10px rgba(52, 152, 219, 0.5); /* Sombra azulada */
+    transition: all 0.3s;
+}
+.boton-hero:hover {
+    background-color: var(--color-acento-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 15px 25px -10px rgba(52, 152, 219, 0.7);
+}
+/* Animación sencilla de flotación para el icono */
+@keyframes flotar {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+/* Decoración de fondo sutil */
+.fondo-patron {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: radial-gradient(var(--color-texto-secundario) 1px, transparent 1px);
+    background-size: 30px 30px;
+    opacity: 0.05;
+    z-index: 1;
+}
+/* Clase para mostrar la app suavemente */
+.mostrar-app-animado {
+    display: block;
+    animation: aparecerSuave 0.8s forwards;
+}
+
+@keyframes aparecerSuave {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+/* Estilo para el botón de imprimir en pantalla */
+.cabecera-reporte-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.boton-imprimir {
+    background-color: #6c757d; /* Gris profesional */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+.boton-imprimir:hover { background-color: #5a6268; }
+/* Ocultar elementos de impresión en la pantalla normal */
+.solo-impresion { display: none; }
+
+/* ==========================================================================
+    ESTILOS DE IMPRESIÓN 
+   ========================================================================== */
+@media print {
+    /* 1. Ocultar TODO lo que no sea el reporte */
+    header, nav, footer, #pantallaBienvenida, #seccionRegistro, .boton-imprimir, .grupo-form, #contenedorAlertas {
+        display: none !important;
+    }
+    /* 2. Ocultar la columna de acciones (Botones Editar/Borrar no sirven en papel) */
+    .ocultar-impresion, .boton-accion, th:last-child, td:last-child {
+        display: none !important;
+    }
+    /* 3. Configurar el cuerpo para papel */
+    body, #aplicacionPrincipal, main {
+        background: white !important;
+        color: black !important;
+        height: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: visible !important;
+    }
+    /* 4. Mostrar la cabecera formal */
+    .solo-impresion {
+        display: block !important;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    /* 5. Ajustar la tabla para tinta */
+    .seccion-vista {
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    .tabla-scroll { overflow: visible !important; }
+    table {
+        width: 100% !important;
+        border: 1px solid #000 !important;
+    }
+    th, td {
+        border: 1px solid #000 !important;
+        color: #000 !important;
+        padding: 5px !important;
+    }
+    /* Forzar que los colores de fondo (badges) se impriman */
+    .etiqueta {
+        border: 1px solid #000;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestión Académica</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <section id="pantallaBienvenida" class="bienvenida-container">
+            <div class="contenido-hero">
+                <div class="icono-hero">🚀</div>
+                <h1 class="titulo-hero">Gestor de Proyectos Académicos</h1>
+                <p class="subtitulo-hero">
+                    Organiza tus entregas, monitorea el progreso en tiempo real y cuida tus fechas límite con nuestra plataforma intuitiva, diseñada especialmente para estudiantes universitarios.
+                </p>
+                <button id="btnIngresarSistema" class="boton-hero">
+                    Ingresar al Espacio de Trabajo ➔
+                </button>
+            </div>
+            <div class="fondo-patron"></div>
+    </section>
+    <div id="aplicacionPrincipal" class="app-oculta">
+    <header>
+        <div class="contenedor encabezado-flex">
+            <h1>📊 Universidad Estatal de Milagro </h1>
+            <nav>
+                <button id="VerReporte" class="boton-nav activo">Listado de Proyectos</button>
+                <button id="VerRegistro" class="boton-nav">Registrar Nuevo</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="contenedor">
+        
+        <div id="contenedorAlertas"></div>
+
+        <section id="seccionReporte" class="seccion-vista">
+    
+    <div class="cabecera-reporte-flex">
+        <button id="btnImprimir" class="boton-imprimir">🖨️ Imprimir Informe</button>
+    </div>
+
+    <div id="cabeceraImpresion" class="solo-impresion">
+        <h1>Reporte Oficial de Proyectos</h1>
+        <p>Facultad de Ingeniería de Software</p>
+        <p>Fecha de emisión: <span id="fechaImpresion"></span></p>
+        <hr>
+    </div>
+
+    <div class="tabla-scroll">
+        <table class="tabla-academica">
+            <thead>
+                <tr>
+                    <th>Nombre del Proyecto</th>
+                    <th>Integrantes</th>
+                    <th>Fecha de Entrega</th>
+                    <th>Progreso</th>
+                    <th>Estado Actual</th>
+                    <th class="ocultar-impresion">Acciones</th> 
+                </tr>
+            </thead>
+            <tbody id="cuerpoTabla">
+                </tbody>
+        </table>
+    </div>
+</section>
+
+        <section id="seccionRegistro" class="seccion-vista oculto">
+            <h2 class="titulo-seccion">Ficha de Registro de Proyecto</h2>
+            <form id="formularioProyecto" class="formulario-academico">
+                
+                <div class="grupo-form">
+                    <label>Nombre del Proyecto:</label>
+                    <input type="text" id="txtNombre" placeholder="Ingrese el título del trabajo" required>
+                </div>
+
+                <div class="grupo-form">
+                    <label>Integrantes:</label>
+                    <input type="text" id="txtIntegrantes" placeholder="Ej: Juan Perez, Maria Gomez" required>
+                </div>
+
+                <div class="grupo-form">
+                    <label>Fecha de Entrega:</label>
+                    <input type="date" id="txtFecha" required>
+                </div>
+
+                <div class="grupo-form">
+                    <label>Porcentaje de Avance (0 - 100):</label>
+                    <input type="number" id="numAvance" min="0" max="100" placeholder="0" required>
+                </div>
+
+                <button type="submit" class="boton-principal">Guardar Datos</button>
+            </form>
+        </section>
+
+    </main>
+
+    <footer class="pie-pagina">
+        <p>Facultad de Ingeniería de Software &copy; 2024</p>
+    </footer>
+
+    <script type="module" src="js/app.js"></script>
+
+</body>
+</html>

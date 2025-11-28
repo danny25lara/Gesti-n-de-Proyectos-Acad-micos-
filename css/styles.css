@@ -268,89 +268,149 @@ main {
     flex-direction: column;
 }
 /* --- ESTILOS DE LA PANTALLA DE BIENVENIDA --- */
-/* Clase utilitaria para ocultar la app al inicio */
-.app-oculta {
-    display: none;
-    opacity: 0; /* Preparado para animación */
-}
-/* El contenedor principal que ocupa toda la pantalla */
+/* --- ESTILOS VISUALES: TEMA CLARO (PROFESIONAL & DINÁMICO) --- */
+
+/* 1. Fondo Claro y Limpio */
 .bienvenida-container {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh; /* 100% de la altura de la ventana */
+    top: 0; left: 0; width: 100%; height: 100vh;
+    /* Fondo gris muy suave, casi blanco */
+    background-color: #f8fafc; 
+    /* Un patrón de puntos muy sutil para darle textura técnica */
+    background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+    background-size: 40px 40px;
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Un degradado profesional y moderno (Azul grisáceo a blanco) */
-    background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
-    z-index: 2000; /* Asegura que esté encima de todo */
+    z-index: 2000;
+    overflow: hidden;
+    transition: opacity 0.5s ease-out 2.5s;
+}
+
+/* 2. Orbes de Color Pastel (Suaves y elegantes) */
+.orbe {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px); /* Difuminado suave */
+    opacity: 0.8; /* Más visibles que en el modo oscuro */
+    animation: flotarFondo 8s infinite alternate ease-in-out;
+    z-index: 1;
+}
+
+.orbe-1 {
+    width: 400px; height: 400px;
+    background: linear-gradient(135deg, #dbeafe 0%, #60a5fa 100%); /* Azules suaves */
+    top: -10%; left: 10%;
+}
+
+.orbe-2 {
+    width: 350px; height: 350px;
+    background: linear-gradient(135deg, #e0e7ff 0%, #818cf8 100%); /* Índigo suave */
+    bottom: 5%; right: 5%;
+    animation-delay: -3s;
+}
+
+.orbe-3 {
+    width: 250px; height: 250px;
+    background: linear-gradient(135deg, #fae8ff 0%, #f472b6 100%); /* Rosa pastel */
+    bottom: 20%; left: 30%;
+    animation-duration: 12s;
+}
+
+@keyframes flotarFondo {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(40px, -40px) scale(1.1); }
+}
+
+/* 3. Tarjeta de Cristal "Frost" (Vidrio Blanco) */
+.glass-card {
+    /* Blanco semitransparente */
+    background: rgba(255, 255, 255, 0.65); 
+    backdrop-filter: blur(20px); /* Efecto borroso potente */
+    -webkit-backdrop-filter: blur(20px);
+    /* Borde blanco sutil */
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    padding: 3.5rem;
+    border-radius: 30px;
+    /* Sombra suave y difusa para dar profundidad */
+    box-shadow: 
+        0 20px 40px -10px rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(255,255,255,0.5) inset;
+    max-width: 650px;
     text-align: center;
-    padding: 20px;
-    transition: all 0.5s ease-in-out; /* Suavidad al desaparecer */
-}
-/* Cuando añadimos esta clase con JS, la pantalla se desvanece hacia arriba */
-.bienvenida-container.desaparecer {
-    opacity: 0;
-    transform: translateY(-50px);
-    pointer-events: none; /* Evita clicks mientras desaparece */
-}
-.contenido-hero {
-    max-width: 600px;
     position: relative;
-    z-index: 2;
+    z-index: 10;
 }
-.icono-hero {
-    font-size: 4rem;
-    margin-bottom: 20px;
-    animation: flotar 3s ease-in-out infinite;
-}
+
+/* 4. Tipografía Oscura y Legible */
 .titulo-hero {
-    font-size: 2.5rem;
-    color: var(--color-primario);
-    margin-bottom: 15px;
+    font-size: 3.2rem;
+    /* Color gris oscuro profesional (Gris Pizarra) */
+    color: #1e293b; 
+    margin-bottom: 0.5rem;
     font-weight: 800;
+    line-height: 1.1;
     letter-spacing: -1px;
 }
-.subtitulo-hero {
-    font-size: 1.1rem;
-    color: var(--color-texto-secundario);
-    margin-bottom: 30px;
-    line-height: 1.6;
+
+.texto-gradiente {
+    /* Gradiente azul vibrante para destacar */
+    background: linear-gradient(135deg, #2563eb, #0891b2);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
-/* Botón gigante y llamativo */
+
+.subtitulo-hero {
+    font-size: 1.15rem;
+    color: #64748b; /* Gris medio para lectura cómoda */
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+    font-weight: 500;
+}
+
+/* 5. Cohete (Con sombra oscura ahora) */
+.icono-hero {
+    font-size: 5.5rem;
+    margin-bottom: 1rem;
+    display: inline-block;
+    filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.15)); /* Sombra realista */
+    animation: flotarCohete 3s ease-in-out infinite;
+}
+
+@keyframes flotarCohete {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+/* 6. Botón Moderno */
 .boton-hero {
-    background-color: var(--color-acento);
+    /* Gradiente Azul Profesional */
+    background: linear-gradient(135deg, #2563eb, #0284c7);
     color: white;
     border: none;
-    padding: 15px 35px;
+    padding: 18px 45px;
     font-size: 1.1rem;
     font-weight: 700;
-    border-radius: 50px; /* Bordes muy redondos */
+    border-radius: 50px;
     cursor: pointer;
-    box-shadow: 0 10px 20px -10px rgba(52, 152, 219, 0.5); /* Sombra azulada */
-    transition: all 0.3s;
+    /* Sombra azul suave */
+    box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.4);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
+
 .boton-hero:hover {
-    background-color: var(--color-acento-hover);
     transform: translateY(-3px);
-    box-shadow: 0 15px 25px -10px rgba(52, 152, 219, 0.7);
+    box-shadow: 0 15px 35px -5px rgba(37, 99, 235, 0.5);
 }
-/* Animación sencilla de flotación para el icono */
-@keyframes flotar {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0px); }
-}
-/* Decoración de fondo sutil */
-.fondo-patron {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background-image: radial-gradient(var(--color-texto-secundario) 1px, transparent 1px);
-    background-size: 30px 30px;
-    opacity: 0.05;
-    z-index: 1;
+
+/* --- MANTENEMOS LA ANIMACIÓN DE LA ESPIRAL GIGANTE --- */
+/* (Asegúrate de no haber borrado @keyframes espiralGigante) */
+.cohete-despegando {
+    transform-origin: center center;
+    animation: espiralGigante 3s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards !important;
 }
 /* Clase para mostrar la app suavemente */
 .mostrar-app-animado {
@@ -538,4 +598,5 @@ main {
 .bienvenida-container.desaparecer {
     transition: opacity 0.5s ease-out 2.5s; /* Retraso de 2.5s */
 }
+
 

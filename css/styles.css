@@ -269,7 +269,6 @@ main {
 }
 /* --- ESTILOS DE LA PANTALLA DE BIENVENIDA --- */
 /* --- ESTILOS VISUALES: TEMA CLARO (PROFESIONAL & DINÁMICO) --- */
-
 /* 1. Fondo Claro y Limpio */
 .bienvenida-container {
     position: fixed;
@@ -405,9 +404,7 @@ main {
     transform: translateY(-3px);
     box-shadow: 0 15px 35px -5px rgba(37, 99, 235, 0.5);
 }
-
 /* --- MANTENEMOS LA ANIMACIÓN DE LA ESPIRAL GIGANTE --- */
-/* (Asegúrate de no haber borrado @keyframes espiralGigante) */
 .cohete-despegando {
     transform-origin: center center;
     animation: espiralGigante 3s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards !important;
@@ -598,5 +595,6 @@ main {
 .bienvenida-container.desaparecer {
     transition: opacity 0.5s ease-out 2.5s; /* Retraso de 2.5s */
 }
+
 
 

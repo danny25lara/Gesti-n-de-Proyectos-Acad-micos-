@@ -7,107 +7,199 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+            <div id="contenedorAlertas"></div>
     <section id="pantallaBienvenida" class="bienvenida-container">
-    
-    <div class="orbe orbe-1"></div>
-    <div class="orbe orbe-2"></div>
-    <div class="orbe orbe-3"></div>
+        <div class="orbe orbe-1"></div>
+        <div class="orbe orbe-2"></div>
+        <div class="orbe orbe-3"></div>
 
-    <div class="contenido-hero glass-card">
-        <div class="icono-hero">🚀</div>
-        <h1 class="titulo-hero">Gestor de Proyectos <span class="texto-gradiente">Académicos</span></h1>
-        <p class="subtitulo-hero">
-            Tu centro de control para dominar las entregas universitarias.
-            Organiza, monitorea y despega hacia el éxito.
-        </p>
-        <button id="btnIngresarSistema" class="boton-hero">
-            Iniciar Misión ➔
-        </button>
-    </div>
-</section>
-    <div id="aplicacionPrincipal" class="app-oculta">
-    <header>
-        <div class="contenedor encabezado-flex">
-            <h1>📊 Universidad Estatal de Milagro </h1>
-            <nav>
-                <button id="VerReporte" class="boton-nav activo">Listado de Proyectos</button>
-                <button id="VerRegistro" class="boton-nav">Registrar Nuevo</button>
-            </nav>
-        </div>
-    </header>
-
-    <main class="contenedor">
-        
-        <div id="contenedorAlertas"></div>
-
-        <section id="seccionReporte" class="seccion-vista">
-    
-    <div class="cabecera-reporte-flex">
-        <button id="btnImprimir" class="boton-imprimir">🖨️ Imprimir Informe</button>
-    </div>
-
-    <div id="cabeceraImpresion" class="solo-impresion">
-        <h1>Reporte Oficial de Proyectos</h1>
-        <p>Facultad de Ingeniería de Software</p>
-        <p>Fecha de emisión: <span id="fechaImpresion"></span></p>
-        <hr>
-    </div>
-
-    <div class="tabla-scroll">
-        <table class="tabla-academica">
-            <thead>
-                <tr>
-                    <th>Nombre del Proyecto</th>
-                    <th>Integrantes</th>
-                    <th>Fecha de Entrega</th>
-                    <th>Progreso</th>
-                    <th>Estado Actual</th>
-                    <th class="ocultar-impresion">Acciones</th> 
-                </tr>
-            </thead>
-            <tbody id="cuerpoTabla">
-                </tbody>
-        </table>
-    </div>
-</section>
-
-        <section id="seccionRegistro" class="seccion-vista oculto">
-            <h2 class="titulo-seccion">Ficha de Registro de Proyecto</h2>
-            <form id="formularioProyecto" class="formulario-academico">
+        <div class="contenido-hero glass-card">
+            <div class="icono-hero">🚀</div>
+            
+            <h1 class="titulo-hero">
+                Gestor de Proyectos <br>
+                <span class="texto-gradiente">Académicos</span>
+            </h1>
+            
+            <p class="subtitulo-hero">
+                Tu centro de control para dominar las entregas universitarias.
+            </p>
+            
+            <div id="formLogin" class="login-form">
+                <h3 style="color:#334155; margin-bottom:15px;">Iniciar Sesión</h3>
                 
-                <div class="grupo-form">
-                    <label>Nombre del Proyecto:</label>
-                    <input type="text" id="txtNombre" required>
+                <input type="email" id="inputUsuario" placeholder="Correo Electrónico" class="input-glass">
+                <input type="password" id="inputPassword" placeholder="Contraseña" class="input-glass">
+                
+                <p id="errorLogin" class="error-msg"></p>
+                
+                <button id="btnLogin" class="boton-hero">Ingresar ➔</button>
+                
+                <p class="texto-toggle">
+                    ¿No tienes cuenta? <a href="#" id="irARegistro">Regístrate aquí</a>
+                </p>
+            </div>
+
+            <div id="formRegistro" class="login-form oculto">
+                <h3 style="color:#334155; margin-bottom:15px;">Crear Cuenta</h3>
+                
+                <input type="email" id="regEmail" placeholder="Tu Correo" class="input-glass">
+                <input type="password" id="regPass" placeholder="Crea una Contraseña" class="input-glass">
+                
+                <div class="grupo-checkbox">
+                    <input type="checkbox" id="checkEsAdmin">
+                    <label for="checkEsAdmin" style="color:#334155; font-size:0.9rem; font-weight:500;">
+                        Soy el Líder del Equipo (Admin)
+                    </label>
+                </div>
+                
+                <p id="infoAdmin" style="color:#d97706; font-size:0.8rem; display:none; background:#fffbeb; padding:5px; border-radius:4px;">
+                    ⚠️ Ya existe un líder. Solo puedes ser invitado.
+                </p>
+
+                <p id="errorRegistro" class="error-msg"></p>
+
+                <button id="btnRegistrar" class="boton-hero" style="background: linear-gradient(135deg, #10b981, #059669);">
+                    Crear Cuenta ✨
+                </button>
+
+                <p class="texto-toggle">
+                    ¿Ya tienes cuenta? <a href="#" id="irALogin">Inicia Sesión</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+    <div id="aplicacionPrincipal" class="app-oculta">
+        
+        <header>
+            <div class="contenedor encabezado-flex">
+                <h1>📊 Panel de Control</h1>
+                <nav>
+                    <button id="btnVerReporte" class="boton-nav activo">Tablero</button>
+                    <button id="btnVerRegistro" class="boton-nav solo-admin">Nuevo Proyecto</button>
+                    <button id="btnVerInformes" class="boton-nav solo-admin">Redactar Informes</button>
+                    <button id="btnExportar" class="boton-nav solo-admin" style="color:#10b981;" title="Descargar Copia de Seguridad">💾 Guardar Data</button>
+                    <button id="btnImportar" class="boton-nav solo-admin" style="color:#f59e0b;" title="Cargar Copia de Seguridad">📂 Cargar Data</button>
+                    <button id="btnCerrarSesion" class="boton-logout">Salir 🔒</button>
+                </nav>
+
+<input type="file" id="inputCargaArchivo" accept=".json" style="display: none;">
+            </div>
+        </header>
+
+        <main class="contenedor">
+
+            <section id="seccionReporte" class="seccion-vista">
+                <div class="cabecera-reporte-flex">
+                    <h2 class="titulo-seccion">Tablero de Proyectos</h2>
+                    <button id="btnImprimir" class="boton-imprimir">🖨️ Imprimir</button>
+                </div>
+                
+                <div id="cabeceraImpresion" class="solo-impresion">
+                    <h1>Sistema de Gestión Académica</h1>
+                    <p>Reporte Oficial de Proyectos</p>
+                    <p>Fecha de emisión: <span id="fechaImpresion"></span></p>
+                    <hr>
                 </div>
 
-                <div class="grupo-form">
-                    <label>Integrantes:</label>
-                    <input type="text" id="txtIntegrantes" required>
+                <div class="tabla-scroll">
+                    <table class="tabla-academica">
+                        <thead>
+                            <tr>
+                                <th>Proyecto</th>
+                                <th>Integrantes</th>
+                                <th>Vencimiento</th>
+                                <th>Progreso</th>
+                                <th>Estado</th>
+                                <th class="columna-acciones">Gestionar</th> 
+                            </tr>
+                        </thead>
+                        <tbody id="cuerpoTabla"></tbody>
+                    </table>
                 </div>
+            </section>
 
-                <div class="grupo-form">
-                    <label>Fecha de Entrega:</label>
-                    <input type="date" id="txtFecha" required>
+            <section id="seccionRegistro" class="seccion-vista oculto">
+                <h2 class="titulo-seccion">Registrar Nuevo Proyecto</h2>
+                <form id="formularioProyecto" class="formulario-academico">
+                    <div class="grupo-form">
+                        <label>Nombre:</label><input type="text" id="txtNombre" required>
+                    </div>
+                    <div class="grupo-form">
+                        <label>Integrantes:</label><input type="text" id="txtIntegrantes" required>
+                    </div>
+                    <div class="grupo-form">
+                        <label>Fecha Entrega:</label><input type="date" id="txtFecha" required>
+                    </div>
+                    <div class="grupo-form">
+                        <label>Porcentaje de Avance (0 - 100):</label>
+                        <input type="number" id="numAvance" min="0" max="100" placeholder="0" required>
+                    </div>
+                    <button type="submit" class="boton-principal">Guardar Proyecto</button>
+                </form>
+            </section>
+
+            <section id="seccionInformes" class="seccion-vista oculto">
+                <h2 class="titulo-seccion">📝 Bitácora del Líder</h2>
+                <p style="margin-bottom: 20px; color: #666;">Seleccione un proyecto para redactar o actualizar su informe.</p>
+                
+                <div class="formulario-academico" style="max-width: 100%;">
+                    <div class="grupo-form">
+                        <label>Seleccionar Proyecto:</label>
+                        <select id="selProyectoInforme" class="input-glass" style="color:black; border:1px solid #ccc; text-align: left;">
+                            <option value="">-- Elija un proyecto --</option>
+                        </select>
+                    </div>
+
+                    <div class="grupo-form">
+                        <label>Cuerpo del Informe:</label>
+                        <textarea id="txtCuerpoInforme" rows="8" style="width:100%; padding:15px; border-radius:8px; border:1px solid #ccc;" placeholder="Escriba aquí el análisis..."></textarea>
+                    </div>
+
+                    <button id="btnGuardarInforme" class="boton-principal">Guardar Informe</button>
                 </div>
+            </section>
 
-                <div class="grupo-form">
-                    <label>Porcentaje de Avance (0 - 100):</label>
-                    <input type="number" id="numAvance" min="0" max="100" placeholder="0" required>
+        </main>
+
+        <footer class="pie-pagina">
+            <p>Facultad de Ingeniería de Software &copy; 2026</p>
+        </footer>
+    </div>
+
+    <div id="modalVisualizar" class="modal-overlay oculto">
+        <div class="modal-contenido glass-card">
+            <span class="cerrar-modal" id="btnCerrarModal">&times;</span>
+            <h2 id="tituloModal">Nombre del Proyecto</h2>
+            <div class="cuerpo-modal">
+                <p class="label-modal">Informe de Estado / Bitácora:</p>
+                <p id="textoModal" class="texto-informe">Aquí va el texto...</p>
+            </div>
+        </div>
+    </div>
+        <div id="modalArchivos" class="modal-overlay oculto">
+        <div class="modal-contenido glass-card" style="max-width: 600px;">
+            <span class="cerrar-modal" id="btnCerrarModalArchivos">&times;</span>
+            
+            <h2 id="tituloModalArchivos" style="margin-bottom: 20px;">Repositorio del Proyecto</h2>
+            <div id="zonaSubidaAdmin" class="grupo-form solo-admin" style="background: #f1f5f9; padding: 15px; border-radius: 8px; border: 2px dashed #cbd5e1;">
+                <label style="margin-bottom: 10px; display:block;">📂 Subir Archivo Nuevo (Máx 1MB):</label>
+                <div style="display: flex; gap: 10px;">
+                    <input type="file" id="inputFileProyecto" class="input-glass" style="text-align: left;">
+                    <button id="btnSubirArchivo" class="boton-principal" style="width: auto; padding: 10px 20px;">Subir</button>
                 </div>
-
-                <button type="submit" class="boton-principal">Guardar Datos</button>
-            </form>
-        </section>
-
-    </main>
-
-    <footer class="pie-pagina">
-        <p>Facultad de Ingeniería de Software &copy; 2024</p>
-    </footer>
+                <p id="msgArchivo" style="font-size: 0.8rem; color: #64748b; margin-top: 5px;"></p>
+            </div>
+            <hr style="margin: 20px 0; border: 0; border-top: 1px solid #eee;">
+            <h3 style="font-size: 1rem; color: #2c3e50; margin-bottom: 15px;">Archivos Disponibles:</h3>
+            <div id="listaArchivosContainer" style="max-height: 250px; overflow-y: auto;">
+                <p style="color: #999; font-style: italic;">No hay archivos en este proyecto.</p>
+            </div>
+        </div>
+    </div>
 
     <script type="module" src="js/app.js"></script>
-
 </body>
-
 </html>
-

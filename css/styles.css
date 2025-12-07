@@ -1,600 +1,238 @@
-
-/* --- 1. Variables de Color (Paleta Neutra & Pro) --- */
+/* ==========================================================================
+   1. VARIABLES Y RESET
+   ========================================================================== */
 :root {
-    /* Colores principales */
-    --color-primario: #2c3e50; /* Gris pizarra oscuro (para textos principales) */
-    --color-acento: #3498db;   /* Azul cobalto (para botones y enlaces) */
-    --color-acento-hover: #2980b9; /* Azul más oscuro para hover */
-    --color-fondo-body: #ecf0f1;   /* Blanco humo muy suave */
-    --color-fondo-panel: #ffffff;  /* Blanco puro */
-    --color-texto-secundario: #7f8c8d; /* Gris medio */
-    
-    /* Estados (Semáforo elegante) */
-    --estado-ok: #27ae60;    /* Verde esmeralda */
-    --estado-pendiente: #f39c12; /* Naranja suave */
-    --estado-error: #c0392b;   /* Rojo ladrillo */
-    
-    /* Sombras y bordes */
+    --color-primario: #2c3e50;
+    --color-acento: #3498db;
+    --color-acento-hover: #2980b9;
+    --color-fondo-body: #ecf0f1;
+    --color-fondo-panel: #ffffff;
+    --color-texto-secundario: #7f8c8d;
+    --estado-ok: #27ae60;
+    --estado-pendiente: #f39c12;
+    --estado-error: #c0392b;
     --sombra-suave: 0 2px 15px rgba(0,0,0,0.05);
     --borde-sutil: 1px solid #e0e0e0;
 }
-/* --- 2. Reset & Tipografía Moderna --- */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
 body {
     background-color: var(--color-fondo-body);
     color: var(--color-primario);
-    /* Usamos una pila de fuentes de sistema modernas para velocidad y limpieza */
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     line-height: 1.6;
 }
-/* --- 3. Encabezado (Tipo Dashboard) --- */
+
+/* ==========================================================================
+   2. ESTRUCTURA APP PRINCIPAL (Sticky Footer)
+   ========================================================================== */
+#aplicacionPrincipal {
+    min-height: 100vh; /* Ocupa toda la pantalla */
+    display: flex;
+    flex-direction: column; /* Organiza verticalmente */
+}
+
+main {
+    padding: 30px 0;
+    flex: 1; /* Esto empuja el footer hacia abajo si hay poco contenido */
+    width: 100%;
+}
+
+.contenedor {
+    width: 92%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.oculto { display: none !important; }
+
+/* ==========================================================================
+   3. HEADER Y NAVEGACIÓN
+   ========================================================================== */
 header {
     background-color: var(--color-fondo-panel);
     padding: 1rem 0;
     box-shadow: var(--sombra-suave);
     border-bottom: var(--borde-sutil);
 }
-.contenedor {
-    width: 92%;
-    max-width: 1200px;
-    margin: auto;
-}
-.encabezado-flex {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-h1 {
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: var(--color-primario);
-    display: flex;
-    align-items: center;
-}
-/* Navegación tipo "Tabs" modernas */
+
+.encabezado-flex { display: flex; justify-content: space-between; align-items: center; }
+
+h1 { font-size: 1.4rem; font-weight: 600; color: var(--color-primario); }
+
 nav {
     background-color: #f8f9fa;
     padding: 5px;
     border-radius: 8px;
     border: var(--borde-sutil);
 }
+
 .boton-nav {
-    background: transparent;
-    border: none;
-    color: var(--color-texto-secundario);
-    padding: 8px 16px;
-    cursor: pointer;
-    font-family: inherit;
-    font-weight: 500;
-    border-radius: 6px;
+    background: transparent; border: none; color: var(--color-texto-secundario);
+    padding: 8px 16px; cursor: pointer; font-weight: 500; border-radius: 6px;
     transition: all 0.3s ease;
 }
-.boton-nav:hover {
-    color: var(--color-primario);
-    background-color: rgba(0,0,0,0.03);
+.boton-nav:hover { color: var(--color-primario); background-color: rgba(0,0,0,0.03); }
+.boton-nav.activo { background-color: var(--color-fondo-panel); color: var(--color-acento); box-shadow: 0 2px 5px rgba(0,0,0,0.08); font-weight: 600; }
+
+.boton-logout {
+    background: transparent; border: 1px solid #ef4444; color: #ef4444;
+    padding: 5px 15px; border-radius: 4px; cursor: pointer; font-size: 0.9rem; margin-left: 20px;
 }
-.boton-nav.activo {
-    background-color: var(--color-fondo-panel);
-    color: var(--color-acento);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.08);
-    font-weight: 600;
-}
-/* --- 4. Cuerpo Principal --- */
-main {
-    padding: 30px 0; /* Esto ya lo tenías */
-    flex: 1; /* Hace que el main ocupe todo el espacio disponible */
-}
-/* En css/estilos.css */
-#aplicacionPrincipal {
-    /* 1. Ocupar mínimo el 100% del alto de la ventana visible */
-    min-height: 100vh;
-    
-    /* 2. Activar Flexbox para organizar verticalmente */
-    display: flex;
-    flex-direction: column;
-}
-/* Paneles (Tarjetas blancas limpias) */
+.boton-logout:hover { background: #ef4444; color: white; }
+
+/* ==========================================================================
+   4. PANELES Y TABLAS
+   ========================================================================== */
 .seccion-vista {
-    background: var(--color-fondo-panel);
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: var(--sombra-suave);
-    border: var(--borde-sutil);
+    background: var(--color-fondo-panel); padding: 30px; border-radius: 12px;
+    box-shadow: var(--sombra-suave); border: var(--borde-sutil); margin-bottom: 20px;
 }
-.titulo-seccion {
-    font-size: 1.3rem;
-    color: var(--color-primario);
-    margin-bottom: 25px;
-    font-weight: 600;
-}
-.oculto { display: none; }
-/* --- 5. Tabla Profesional --- */
-.tabla-scroll {
-    overflow-x: auto;
-}
-.tabla-academica {
-    width: 100%;
-    border-collapse: separate; /* Importante para los bordes redondeados */
-    border-spacing: 0;
-    width: 100%;
-}
-.tabla-academica th, .tabla-academica td {
-    padding: 15px 20px;
-    text-align: left;
-    border-bottom: var(--borde-sutil);
-}
-.tabla-academica th {
-    background-color: #f8f9fa;
-    color: var(--color-texto-secundario);
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    letter-spacing: 0.5px;
-    border-top: var(--borde-sutil);
-}
-/* Esquinas redondeadas para el encabezado de la tabla */
+
+.titulo-seccion { font-size: 1.3rem; color: var(--color-primario); margin-bottom: 25px; }
+
+.tabla-scroll { overflow-x: auto; }
+.tabla-academica { width: 100%; border-collapse: separate; border-spacing: 0; }
+.tabla-academica th, .tabla-academica td { padding: 15px 20px; text-align: left; border-bottom: var(--borde-sutil); }
+.tabla-academica th { background-color: #f8f9fa; color: var(--color-texto-secundario); border-top: var(--borde-sutil); }
 .tabla-academica th:first-child { border-top-left-radius: 8px; }
 .tabla-academica th:last-child { border-top-right-radius: 8px; }
+.tabla-academica tbody tr:hover { background-color: #f9fafb; }
 
-/* Efecto hover en las filas */
-.tabla-academica tbody tr:hover {
-    background-color: #f9fafb;
-}
-/* Porcentaje en negrita */
-.tabla-academica td strong {
-    font-weight: 700;
-    color: var(--color-primario);
-}
-/* --- 6. Etiquetas (Badges) Modernas --- */
-.etiqueta {
-    padding: 6px 12px;
-    border-radius: 20px; /* Forma de píldora */
-    font-size: 0.8rem;
-    font-weight: 600;
-    display: inline-block;
-    /* Colores suaves con texto oscuro */
-}
+/* Etiquetas y Botones */
+.etiqueta { padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; display: inline-block; }
 .estado-ok { background-color: #d4edda; color: var(--estado-ok); }
 .estado-pendiente { background-color: #fce5cd; color: var(--estado-pendiente); }
 .estado-retraso { background-color: #f8d7da; color: var(--estado-error); }
-/* --- 7. Botones de Acción (Iconos) --- */
+
 .boton-accion {
-    border: none;
-    padding: 8px;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%; /* Botones redondos */
-    cursor: pointer;
-    font-size: 0.9rem;
-    margin: 0 4px;
-    transition: all 0.2s;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    border: none; padding: 8px; width: 32px; height: 32px; border-radius: 50%;
+    cursor: pointer; font-size: 0.9rem; margin: 0 4px; transition: all 0.2s;
+    display: inline-flex; align-items: center; justify-content: center;
 }
 .boton-accion:hover { transform: translateY(-2px); box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-/* Colores más sutiles para los botones */
 .boton-editar { background-color: #e3f2fd; color: var(--color-acento); }
 .boton-eliminar { background-color: #fbe9e7; color: var(--estado-error); }
-/* --- 8. Formulario Moderno --- */
-.formulario-academico {
-    max-width: 600px;
-}
+.boton-ver { background-color: #ffa600; color: white; }
+
+/* ==========================================================================
+   5. FORMULARIOS
+   ========================================================================== */
 .grupo-form { margin-bottom: 20px; }
-.grupo-form label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 8px;
-    color: var(--color-primario);
-    font-size: 0.95rem;
-}
-.grupo-form input {
-    width: 100%;
-    padding: 12px 15px;
-    border: 1px solid #dcdfe6;
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: border-color 0.3s;
-    background-color: #fdfdfd;
-}
-.grupo-form input:focus {
-    outline: none;
-    border-color: var(--color-acento);
-    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1); /* Anillo de enfoque sutil */
-}
+.grupo-form label { display: block; font-weight: 600; margin-bottom: 8px; }
+.grupo-form input { width: 100%; padding: 12px 15px; border: 1px solid #dcdfe6; border-radius: 8px; background-color: #fdfdfd; }
 .boton-principal {
-    background-color: var(--color-acento);
-    color: white;
-    padding: 14px 24px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 600;
-    width: 100%;
-    transition: background-color 0.3s;
+    background-color: var(--color-acento); color: white; padding: 14px 24px;
+    border: none; border-radius: 8px; cursor: pointer; font-weight: 600; width: 100%;
 }
 .boton-principal:hover { background-color: var(--color-acento-hover); }
-/* --- 9. Alertas Tipo "Toast" --- */
-#contenedorAlertas {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1000;
-}
-.alerta {
-    padding: 15px 20px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    font-family: inherit;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    display: flex;
-    align-items: center;
-    animation: slideInRight 0.3s ease-out;
-    min-width: 300px;
-    background: var(--color-fondo-panel);
-    border-left: 5px solid;
-}
-/* Iconos antes del mensaje */
-.alerta-exito { border-color: var(--estado-ok); }
-.alerta-exito::before { content: '✅'; margin-right: 10px; }
 
-.alerta-error { border-color: var(--estado-error); }
-.alerta-error::before { content: '⚠️'; margin-right: 10px; }
-
-@keyframes slideInRight {
-    from { transform: translateX(100%); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-}
-/* --- 10. Pie de Página --- */
-.pie-pagina {
-    text-align: center;
-    padding: 20px;
-    color: var(--color-texto-secundario);
-    font-size: 0.9rem;
-}
-.mostrar-app-animado {
-    /* display: block; <--- BORRA O COMENTA ESTA LÍNEA si la tenías */
-    
-    /* Flexbox ya está definido en #aplicacionPrincipal, así que solo animamos la opacidad */
-    animation: aparecerSuave 0.8s forwards;
-    
-    /* Si por alguna razón se rompe, fuerza el flex aquí también: */
-    display: flex !important; 
-    flex-direction: column;
-}
-/* --- ESTILOS DE LA PANTALLA DE BIENVENIDA --- */
-/* --- ESTILOS VISUALES: TEMA CLARO (PROFESIONAL & DINÁMICO) --- */
-/* 1. Fondo Claro y Limpio */
+/* ==========================================================================
+   6. PANTALLA DE BIENVENIDA (MODO CLARO)
+   ========================================================================== */
 .bienvenida-container {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100vh;
-    /* Fondo gris muy suave, casi blanco */
-    background-color: #f8fafc; 
-    /* Un patrón de puntos muy sutil para darle textura técnica */
+    position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+    background-color: #f8fafc;
     background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
     background-size: 40px 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-    overflow: hidden;
+    display: flex; justify-content: center; align-items: center;
+    z-index: 2000; overflow: hidden;
     transition: opacity 0.5s ease-out 2.5s;
 }
 
-/* 2. Orbes de Color Pastel (Suaves y elegantes) */
-.orbe {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(60px); /* Difuminado suave */
-    opacity: 0.8; /* Más visibles que en el modo oscuro */
-    animation: flotarFondo 8s infinite alternate ease-in-out;
-    z-index: 1;
-}
+.orbe { position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.8; z-index: 1; animation: flotarFondo 8s infinite alternate ease-in-out; }
+.orbe-1 { width: 400px; height: 400px; background: linear-gradient(135deg, #dbeafe 0%, #60a5fa 100%); top: -10%; left: 10%; }
+.orbe-2 { width: 350px; height: 350px; background: linear-gradient(135deg, #e0e7ff 0%, #818cf8 100%); bottom: 5%; right: 5%; animation-delay: -3s; }
+.orbe-3 { width: 250px; height: 250px; background: linear-gradient(135deg, #fae8ff 0%, #f472b6 100%); bottom: 20%; left: 30%; animation-duration: 12s; }
+@keyframes flotarFondo { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(40px, -40px) scale(1.1); } }
 
-.orbe-1 {
-    width: 400px; height: 400px;
-    background: linear-gradient(135deg, #dbeafe 0%, #60a5fa 100%); /* Azules suaves */
-    top: -10%; left: 10%;
-}
-
-.orbe-2 {
-    width: 350px; height: 350px;
-    background: linear-gradient(135deg, #e0e7ff 0%, #818cf8 100%); /* Índigo suave */
-    bottom: 5%; right: 5%;
-    animation-delay: -3s;
-}
-
-.orbe-3 {
-    width: 250px; height: 250px;
-    background: linear-gradient(135deg, #fae8ff 0%, #f472b6 100%); /* Rosa pastel */
-    bottom: 20%; left: 30%;
-    animation-duration: 12s;
-}
-
-@keyframes flotarFondo {
-    0% { transform: translate(0, 0) scale(1); }
-    100% { transform: translate(40px, -40px) scale(1.1); }
-}
-
-/* 3. Tarjeta de Cristal "Frost" (Vidrio Blanco) */
 .glass-card {
-    /* Blanco semitransparente */
-    background: rgba(255, 255, 255, 0.65); 
-    backdrop-filter: blur(20px); /* Efecto borroso potente */
-    -webkit-backdrop-filter: blur(20px);
-    /* Borde blanco sutil */
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    padding: 3.5rem;
-    border-radius: 30px;
-    /* Sombra suave y difusa para dar profundidad */
-    box-shadow: 
-        0 20px 40px -10px rgba(0, 0, 0, 0.1),
-        0 0 0 1px rgba(255,255,255,0.5) inset;
-    max-width: 650px;
-    text-align: center;
-    position: relative;
-    z-index: 10;
+    background: rgba(255, 255, 255, 0.65); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.8); padding: 3.5rem; border-radius: 30px;
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255,255,255,0.5) inset;
+    max-width: 650px; text-align: center; position: relative; z-index: 10;
 }
 
-/* 4. Tipografía Oscura y Legible */
-.titulo-hero {
-    font-size: 3.2rem;
-    /* Color gris oscuro profesional (Gris Pizarra) */
-    color: #1e293b; 
-    margin-bottom: 0.5rem;
-    font-weight: 800;
-    line-height: 1.1;
-    letter-spacing: -1px;
-}
+.titulo-hero { font-size: 3.2rem; color: #1e293b; font-weight: 800; line-height: 1.1; margin-bottom: 0.5rem; }
+.texto-gradiente { background: linear-gradient(135deg, #2563eb, #0891b2); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.subtitulo-hero { font-size: 1.15rem; color: #64748b; margin-bottom: 2.5rem; }
+.icono-hero { font-size: 5.5rem; display: inline-block; filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.15)); animation: flotarCohete 3s ease-in-out infinite; }
+@keyframes flotarCohete { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
-.texto-gradiente {
-    /* Gradiente azul vibrante para destacar */
-    background: linear-gradient(135deg, #2563eb, #0891b2);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+/* Inputs Login Modernos (Texto Oscuro) */
+.login-form { display: flex; flex-direction: column; gap: 15px; margin-bottom: 20px; width: 100%; }
+.input-glass {
+    width: 100%; padding: 14px; border-radius: 50px; border: 1px solid #cbd5e1;
+    background: rgba(255, 255, 255, 0.9); outline: none; text-align: center; font-size: 1rem;
+    color: #1e293b; transition: 0.3s;
 }
-
-.subtitulo-hero {
-    font-size: 1.15rem;
-    color: #64748b; /* Gris medio para lectura cómoda */
-    margin-bottom: 2.5rem;
-    line-height: 1.6;
-    font-weight: 500;
-}
-
-/* 5. Cohete (Con sombra oscura ahora) */
-.icono-hero {
-    font-size: 5.5rem;
-    margin-bottom: 1rem;
-    display: inline-block;
-    filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.15)); /* Sombra realista */
-    animation: flotarCohete 3s ease-in-out infinite;
-}
-
-@keyframes flotarCohete {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
-}
-
-/* 6. Botón Moderno */
+.input-glass:focus { border-color: #2563eb; background: white; box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1); }
 .boton-hero {
-    /* Gradiente Azul Profesional */
-    background: linear-gradient(135deg, #2563eb, #0284c7);
-    color: white;
-    border: none;
-    padding: 18px 45px;
-    font-size: 1.1rem;
-    font-weight: 700;
-    border-radius: 50px;
-    cursor: pointer;
-    /* Sombra azul suave */
-    box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.4);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
+    background: linear-gradient(135deg, #2563eb, #0284c7); color: white; border: none; padding: 18px 45px;
+    font-size: 1.1rem; font-weight: 700; border-radius: 50px; cursor: pointer; box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.4);
+    transition: all 0.3s ease; position: relative; overflow: hidden;
+}
+.boton-hero:hover { transform: translateY(-3px); box-shadow: 0 15px 35px -5px rgba(37, 99, 235, 0.5); }
+
+/* Links Login */
+.texto-toggle { color: #64748b; font-size: 0.9rem; margin-top: 10px; }
+.texto-toggle a { color: #2563eb; font-weight: 700; text-decoration: none; }
+.grupo-checkbox { display: flex; align-items: center; gap: 10px; justify-content: center; background: rgba(0,0,0,0.05); padding: 10px; border-radius: 8px; margin: 5px 0; }
+.error-msg { color: #ef4444; font-size: 0.9rem; font-weight: bold; min-height: 20px; }
+
+/* Animación de entrada App */
+.mostrar-app-animado { display: flex !important; flex-direction: column; animation: aparecerSuave 0.8s forwards; }
+@keyframes aparecerSuave { from { opacity: 0; } to { opacity: 1; } }
+.bienvenida-container.desaparecer { transition: opacity 0.5s ease-out 2.5s; }
+
+/* Animación Cohete */
+.cohete-despegando { transform-origin: center center; animation: espiralGigante 3s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards !important; }
+@keyframes espiralGigante {
+    0% { transform: scale(1) rotate(0deg); opacity: 1; }
+    20% { transform: scale(0.5) rotate(-90deg); opacity: 1; }
+    100% { transform: scale(100) rotate(1080deg); opacity: 0; }
 }
 
-.boton-hero:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 35px -5px rgba(37, 99, 235, 0.5);
+/* ==========================================================================
+   7. MODAL Y ALERTAS
+   ========================================================================== */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(5px);
+    display: flex; justify-content: center; align-items: center; z-index: 3000; opacity: 1; transition: opacity 0.3s;
 }
-/* --- MANTENEMOS LA ANIMACIÓN DE LA ESPIRAL GIGANTE --- */
-.cohete-despegando {
-    transform-origin: center center;
-    animation: espiralGigante 3s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards !important;
-}
-/* Clase para mostrar la app suavemente */
-.mostrar-app-animado {
-    display: block;
-    animation: aparecerSuave 0.8s forwards;
-}
+.modal-overlay.oculto { display: none; opacity: 0; }
+.modal-contenido { background: white; padding: 30px; border-radius: 15px; width: 90%; max-width: 500px; position: relative; text-align: left; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2); }
+.cerrar-modal { position: absolute; top: 15px; right: 20px; font-size: 2rem; cursor: pointer; color: #64748b; line-height: 1; }
+.label-modal { font-weight: bold; color: #2563eb; margin-top: 15px; margin-bottom: 5px; font-size: 0.9rem; text-transform: uppercase; }
+.texto-informe { background: #f1f5f9; padding: 15px; border-radius: 8px; border-left: 4px solid #2563eb; white-space: pre-wrap; color: #334155; max-height: 300px; overflow-y: auto; }
 
-@keyframes aparecerSuave {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-/* Estilo para el botón de imprimir en pantalla */
-.cabecera-reporte-flex {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-.boton-imprimir {
-    background-color: #6c757d; /* Gris profesional */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background 0.3s;
-}
-.boton-imprimir:hover { background-color: #5a6268; }
-/* Ocultar elementos de impresión en la pantalla normal */
+#contenedorAlertas { position: fixed; top: 20px; right: 20px; z-index: 9999; }
+.alerta { padding: 15px 20px; margin-bottom: 10px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); display: flex; align-items: center; animation: slideInRight 0.3s ease-out; min-width: 300px; background: white; border-left: 5px solid; }
+.alerta-exito { border-color: var(--estado-ok); } .alerta-exito::before { content: '✅'; margin-right: 10px; }
+.alerta-error { border-color: var(--estado-error); } .alerta-error::before { content: '⚠️'; margin-right: 10px; }
+@keyframes slideInRight { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+
+/* ==========================================================================
+   8. SISTEMA DE ROLES Y FOOTER
+   ========================================================================== */
+body.rol-usuario .solo-admin { display: none !important; }
+
+/* IMPRESIÓN */
+.boton-imprimir { background-color: #6c757d; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-weight: 600; }
+.cabecera-reporte-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
 .solo-impresion { display: none; }
 
-/* ==========================================================================
-    ESTILOS DE IMPRESIÓN 
-   ========================================================================== */
+.pie-pagina { text-align: center; padding: 20px; color: var(--color-texto-secundario); font-size: 0.9rem; background: var(--color-fondo-panel); border-top: var(--borde-sutil); margin-top: auto; }
+
 @media print {
-    /* 1. Ocultar TODO lo que no sea el reporte */
-    header, nav, footer, #pantallaBienvenida, #seccionRegistro, .boton-imprimir, .grupo-form, #contenedorAlertas {
-        display: none !important;
-    }
-    /* 2. Ocultar la columna de acciones (Botones Editar/Borrar no sirven en papel) */
-    .ocultar-impresion, .boton-accion, th:last-child, td:last-child {
-        display: none !important;
-    }
-    /* 3. Configurar el cuerpo para papel */
-    body, #aplicacionPrincipal, main {
-        background: white !important;
-        color: black !important;
-        height: auto !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        overflow: visible !important;
-    }
-    /* 4. Mostrar la cabecera formal */
-    .solo-impresion {
-        display: block !important;
-        text-align: center;
-        margin-bottom: 20px;
-    }
-    /* 5. Ajustar la tabla para tinta */
-    .seccion-vista {
-        box-shadow: none !important;
-        border: none !important;
-        padding: 0 !important;
-        margin: 0 !important;
-    }
-    .tabla-scroll { overflow: visible !important; }
-    table {
-        width: 100% !important;
-        border: 1px solid #000 !important;
-    }
-    th, td {
-        border: 1px solid #000 !important;
-        color: #000 !important;
-        padding: 5px !important;
-    }
-    /* Forzar que los colores de fondo (badges) se impriman */
-    .etiqueta {
-        border: 1px solid #000;
-        print-color-adjust: exact;
-        -webkit-print-color-adjust: exact;
-    }
-
+    header, nav, footer, #pantallaBienvenida, #seccionRegistro, .boton-imprimir, .grupo-form, #contenedorAlertas { display: none !important; }
+    .ocultar-impresion, .boton-accion, th:last-child, td:last-child { display: none !important; }
+    body, #aplicacionPrincipal, main { background: white !important; color: black !important; height: auto !important; margin: 0 !important; padding: 0 !important; overflow: visible !important; }
+    .solo-impresion { display: block !important; text-align: center; margin-bottom: 20px; }
+    .seccion-vista { box-shadow: none !important; border: none !important; padding: 0 !important; margin: 0 !important; }
+    table { width: 100% !important; border: 1px solid #000 !important; }
+    th, td { border: 1px solid #000 !important; color: #000 !important; padding: 5px !important; }
+    .etiqueta { border: 1px solid #000; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
 }
-/* css/estilos.css - AGREGAR AL FINAL DE TODO */
-
-/* ==========================================================================
-   DISEÑO RESPONSIVO (MÓVILES Y TABLETS)
-   ========================================================================== */
-
-/* Reglas que solo aplican si la pantalla es menor a 768px (Tablets y Celulares) */
-@media (max-width: 768px) {
-
-    /* 1. Ajustar el Encabezado */
-    .encabezado-flex {
-        flex-direction: column; /* Poner elementos uno debajo del otro */
-        text-align: center;
-        gap: 15px; /* Espacio entre título y botones */
-    }
-
-    h1 {
-        font-size: 1.2rem; /* Título más pequeño */
-        justify-content: center; /* Centrar icono y texto */
-    }
-
-    nav {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        gap: 5px;
-    }
-
-    .boton-nav {
-        padding: 8px 12px;
-        font-size: 0.9rem;
-        flex: 1; /* Que los botones ocupen el ancho disponible */
-    }
-
-    /* 2. Ajustar la Pantalla de Bienvenida */
-    .titulo-hero {
-        font-size: 1.8rem; /* Reducir tamaño gigante */
-    }
-    
-    .contenido-hero {
-        padding: 0 15px; /* Margen para que no pegue a los bordes */
-    }
-
-    /* 3. Ajustar Secciones y Formularios */
-    .seccion-vista {
-        padding: 20px 15px; /* Menos relleno interno */
-    }
-
-    /* Botones más grandes para dedos (Touch friendly) */
-    .boton-principal, .boton-hero {
-        padding: 15px;
-        font-size: 1rem;
-    }
-
-    /* 4. Tabla con Scroll Horizontal (Crucial en móviles) */
-    .tabla-scroll {
-        width: 100%;
-        overflow-x: auto; /* Permite deslizar con el dedo si la tabla es muy ancha */
-        -webkit-overflow-scrolling: touch; /* Suavidad en iPhone */
-        padding-bottom: 10px;
-    }
-
-    /* Ajustar tamaño de letra de la tabla */
-    .tabla-academica th, .tabla-academica td {
-        padding: 10px;
-        font-size: 0.85rem; /* Letra un poco más chica para que quepa más info */
-    }
-
-    /* 5. Alertas (Toast) */
-    #contenedorAlertas {
-        width: 90%; /* Que no ocupe ancho fijo, sino porcentaje */
-        right: 5%; /* Centrado relativo */
-        left: 5%;
-    }
-}
-.cohete-despegando {
-    /* Centramos el punto de giro para que crezca hacia tu cara */
-    transform-origin: center center;
-    
-    /* 3 segundos de animación dramática */
-    animation: espiralGigante 3s cubic-bezier(0.55, 0.055, 0.675, 0.19) forwards !important;
-}
-@keyframes espiralGigante {
-    0% {
-        transform: scale(1) rotate(0deg);
-        opacity: 1;
-    }
-    20% {
-        /* Retrocede un poco para tomar impulso (efecto resorte) */
-        transform: scale(0.5) rotate(-90deg);
-        opacity: 1;
-    }
-    100% {
-        /* Gira 3 veces (1080deg) Y se hace 100 veces más grande */
-        /* Al crecer tanto mientras gira, crea el efecto de espiral hacia ti */
-        transform: scale(100) rotate(1080deg); 
-        opacity: 0; /* Se desvanece justo cuando ya es enorme */
-    }
-}
-/* El fondo espera casi hasta el final para desaparecer */
-.bienvenida-container.desaparecer {
-    transition: opacity 0.5s ease-out 2.5s; /* Retraso de 2.5s */
-}
-
-
-

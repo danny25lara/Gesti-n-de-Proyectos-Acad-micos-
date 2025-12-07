@@ -7,5 +7,7 @@ export class Proyecto {
         this.integrantes = integrantes;
         this.fechaEntrega = fecha;
         this.avance = parseInt(avance);
+        this.informe = "";
+        this.archivos = [];
     }
 }

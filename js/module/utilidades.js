@@ -17,26 +17,20 @@ export function calcularEstadoProyecto(fechaLimite, porcentaje) {
 }
 
 // Función para mostrar mensajes en pantalla
-export function mostrarAlerta(mensaje, esError) {
-    let contenedor = document.getElementById('contenedorAlertas');
+export function mostrarAlerta(mensaje, esError = false) {
+    const contenedor = document.getElementById('contenedorAlertas');
     
-    // Limpiamos alertas anteriores
-    contenedor.innerHTML = '';
-
-    let div = document.createElement('div');
+    const div = document.createElement('div');
+    // Asignamos clases: 'alerta' base, y luego el color
+    div.className = esError ? 'alerta alerta-error' : 'alerta alerta-exito';
     div.textContent = mensaje;
-    
-    // Asignar clase según el tipo de mensaje
-    if (esError) {
-        div.className = 'alerta alerta-error';
-    } else {
-        div.className = 'alerta alerta-exito';
-    }
-
+    // Animación de entrada
+    div.style.animation = "slideInRight 0.5s forwards";
     contenedor.appendChild(div);
-
-    // Eliminar el mensaje después de 3 segundos (3000 ms)
-    setTimeout(function() {
-        div.remove();
-    }, 3000);
+    // Eliminar a los 4 segundos
+    setTimeout(() => {
+        // Animación de salida (opcional, visualmente se va desvaneciendo)
+        div.style.opacity = '0';
+        setTimeout(() => div.remove(), 500); // Borrar del DOM
+    }, 4000);
 }
